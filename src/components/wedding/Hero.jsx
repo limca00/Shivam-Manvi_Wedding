@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { Image } from "@/components/ui/image";
 import { WEDDING_CONFIG } from "@/lib/weddingConfig";
 
 const CREAM = "#FBF7F0";
@@ -18,16 +17,35 @@ export default function Hero() {
             className="relative min-h-[100svh] w-full overflow-hidden scroll-mt-16"
             style={{ backgroundColor: CREAM }}
         >
-            {/* Full-bleed background photo on every screen size */}
-            <Image
-                src={WEDDING_CONFIG.heroImage}
-                fittingType="fill"
-                focalPointX={0.7}
-                focalPointY={0.55}
-                alt={`${brideName} and ${groomName} — couple portrait`}
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ objectPosition: "70% 55%" }}
-            />
+            {/* Full-bleed background photo on every screen size.
+                Served as optimized WebP (207 KB desktop / 94 KB mobile)
+                with fetchpriority="high" so the fetch happens in parallel
+                with the JS bundle — no useSize measurement delay. */}
+            <picture className="absolute inset-0 w-full h-full">
+                {/* Mobile: ≤ 639 px — 94 KB WebP */}
+                <source
+                    srcSet="/images/couple-portrait-mobile.webp"
+                    type="image/webp"
+                    media="(max-width: 639px)"
+                />
+                {/* Desktop: ≥ 640 px — 207 KB WebP */}
+                <source
+                    srcSet="/images/couple-portrait.webp"
+                    type="image/webp"
+                    media="(min-width: 640px)"
+                />
+                {/* Fallback for browsers without WebP support */}
+                <img
+                    src={WEDDING_CONFIG.heroImage}
+                    alt={`${brideName} and ${groomName} — couple portrait`}
+                    fetchpriority="high"
+                    loading="eager"
+                    decoding="async"
+                    className="w-full h-full object-cover"
+                    style={{ objectPosition: "70% 55%" }}
+                />
+            </picture>
+
 
             {/* Legibility gradient so the overlaid gold text stays readable everywhere —
                 deeper than a near-white treatment needs, since gold has less

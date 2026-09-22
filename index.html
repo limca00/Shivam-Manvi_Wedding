@@ -5,6 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="/images/logo-monogram.png" />
+  <!-- Preload hero background — fetch starts before JS runs, eliminating the
+       "text without background" flash. Each device only fetches its variant. -->
+  <link rel="preload" as="image" href="/images/couple-portrait.webp"
+        type="image/webp" media="(min-width: 640px)" />
+  <link rel="preload" as="image" href="/images/couple-portrait-mobile.webp"
+        type="image/webp" media="(max-width: 639px)" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
