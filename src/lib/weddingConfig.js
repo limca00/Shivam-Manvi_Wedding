@@ -68,6 +68,3 @@ export const WEDDING_CONFIG = {
     // --- Music ---
     musicFilePath: "/audio/wedding-music.mp3",
 };
-
-// Used for Open Graph / share links. Falls back to window.location at runtime.
-export const SITE_URL = "https://manvi-shivam-wedding.base44.app";

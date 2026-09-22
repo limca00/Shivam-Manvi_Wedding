@@ -14,9 +14,6 @@ dist-ssr/
 .env.local
 .env.*.local
 
-# Base44 local link pointer (per-clone, created by `base44 link`)
-base44/.app.jsonc
-
 # Claude Code local session state (personal, not project source)
 .claude/
 
