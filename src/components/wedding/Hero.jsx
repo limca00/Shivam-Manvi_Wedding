@@ -7,9 +7,10 @@ const CREAM = "#FBF7F0";
 const GOLD = "#C9A24B";
 const GOLD_DEEP = "#9B6A2E";
 const GOLD_SHADOW = "0 2px 14px rgba(0,0,0,0.55)";
+const GOLD_DEEP_SHADOW = "0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.7)";
 
 export default function Hero() {
-    const { brideName, groomName } = WEDDING_CONFIG;
+    const { brideName, groomName, familyNames } = WEDDING_CONFIG;
 
     return (
         <section
@@ -89,6 +90,23 @@ export default function Hero() {
                     </motion.h1>
                 </div>
 
+                <div className="px-6 text-center -mt-2">
+                    <motion.p
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 1 }}
+                        className="tracking-[0.25em] text-[10px] sm:text-xs uppercase"
+                        style={{
+                            color: GOLD_DEEP,
+                            fontFamily: "'Cinzel', serif",
+                            fontWeight: 700,
+                            textShadow: GOLD_DEEP_SHADOW,
+                        }}
+                    >
+                        {familyNames.brideFamily} &amp; {familyNames.groomFamily}
+                    </motion.p>
+                </div>
+
                 <div className="pb-24 sm:pb-16 px-6 text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 16 }}
@@ -110,8 +128,8 @@ export default function Hero() {
                             style={{
                                 color: GOLD_DEEP,
                                 fontFamily: "'Cinzel', serif",
-                                fontWeight: 600,
-                                textShadow: GOLD_SHADOW,
+                                fontWeight: 700,
+                                textShadow: GOLD_DEEP_SHADOW,
                             }}
                         >
                             Save the Date

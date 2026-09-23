@@ -11,11 +11,11 @@ export const WEDDING_CONFIG = {
 
     // --- Opening text ---
     openingLine: "Om Shri Ganeshay Namah",
-    welcomeTagline: "Welcome to the wedding",
+    welcomeTagline: "Welcome you all to the wedding",
 
     // --- Event date & time (ISO string — drives countdown + .ics) ---
     weddingDate: "2027-01-25T11:00:00",
-    weddingTime: "11:00 AM onwards",
+    weddingTime: "7:00 PM onwards",
     weddingDateDisplay: "25 January 2027",
 
     // --- Venue ---
@@ -41,25 +41,19 @@ export const WEDDING_CONFIG = {
     eventDetails: {
         title: "The Wedding Ceremony",
         date: "25 January 2027",
-        time: "11:00 AM onwards",
+        time: "7:00 PM onwards",
         venue: "Royal Ambience Party Lawn, Indirapuram",
     },
 
     // --- Family ---
     familyNames: {
-        brideFamily: "Daughter of the Agarwal Family",
-        groomFamily: "Son of the Sharma Family",
+        brideFamily: "Daughter of Katia Family",
+        groomFamily: "Son of kalra Family",
     },
 
-    // --- RSVP ---
-    rsvpEndpoint: "",
-    rsvpFieldMapping: {
-        name: "entry.123456",
-        guests: "entry.234567",
-        attendance: "entry.345678",
-        meal: "entry.456789",
-        message: "entry.567890",
-    },
+    // --- RSVP (Google Apps Script web app) ---
+    rsvpEndpoint:
+        "https://script.google.com/macros/s/AKfycbxhtWGFu9Czi7l5RE4XiaO4BAEJ7SEE0zUV_7Tj739k0Z1nAajbYuLa72c7en-SWa59fw/exec",
 
     // --- Share ---
     whatsappShareMessage:

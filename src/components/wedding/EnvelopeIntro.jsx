@@ -114,7 +114,7 @@ export default function EnvelopeIntro({ onOpen, onUserGesture }) {
                             boxShadow: "0 10px 22px -8px rgba(74,16,32,0.6)",
                         }}
                     >
-                        Tap to Break the Seal
+                        Open with Love
                     </button>
                     <button
                         onClick={onOpen}

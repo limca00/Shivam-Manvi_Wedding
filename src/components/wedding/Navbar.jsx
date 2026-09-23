@@ -18,11 +18,13 @@ export default function Navbar({ onHero = false }) {
           M&amp;S
         </a>
         <div className="flex items-center gap-7">
-          <button onClick={() => scrollTo("hero")}
+          {["hero", "rsvp"].map((id) => (
+            <button key={id} onClick={() => scrollTo(id)}
               style={{ fontFamily: "Montserrat,sans-serif", fontSize: "0.65rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.9)", background: "transparent", border: "none", cursor: "pointer" }}
             >
-              Home
+              {id === "hero" ? "Home" : "RSVP"}
             </button>
+          ))}
         </div>
       </nav>
     );
@@ -42,11 +44,13 @@ export default function Navbar({ onHero = false }) {
         M&amp;S
       </a>
       <div style={{ display: "flex", gap: "1.75rem" }}>
-          <button onClick={() => scrollTo("hero")}
+        {["hero", "rsvp"].map((id) => (
+          <button key={id} onClick={() => scrollTo(id)}
             style={{ fontFamily: "Montserrat,sans-serif", fontSize: "0.68rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C9A24B", background: "transparent", border: "none", cursor: "pointer" }}
           >
-            Home
+            {id === "hero" ? "Home" : "RSVP"}
           </button>
+        ))}
       </div>
     </nav>
   );

@@ -13,7 +13,6 @@ export default function RSVP() {
         name: "",
         guests: "1",
         attendance: "Joyfully Accept",
-        meal: "",
         message: "",
     });
     const [status, setStatus] = useState("idle"); // idle | submitting | success | error | notconnected
@@ -34,15 +33,21 @@ export default function RSVP() {
 
         setStatus("submitting");
         try {
-            const m = WEDDING_CONFIG.rsvpFieldMapping;
-            const fd = new FormData();
-            fd.append(m.name, form.name);
-            fd.append(m.guests, form.guests);
-            fd.append(m.attendance, form.attendance);
-            if (form.meal) fd.append(m.meal, form.meal);
-            if (form.message) fd.append(m.message, form.message);
-
-            await fetch(endpoint, { method: "POST", mode: "no-cors", body: fd });
+            // Apps Script web apps don't reliably send CORS headers back to the
+            // browser even on success, so we fire the request opaquely (no-cors)
+            // and treat a resolved fetch as success. text/plain avoids a CORS
+            // preflight (OPTIONS), which Apps Script doesn't handle.
+            await fetch(endpoint, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({
+                    name: form.name,
+                    guests: form.guests,
+                    attendance: form.attendance,
+                    message: form.message,
+                }),
+            });
             setStatus("success");
         } catch (err) {
             setStatus("error");
@@ -132,24 +137,6 @@ export default function RSVP() {
                             </label>
                         ))}
                     </div>
-                </div>
-
-                <div>
-                    <label className="block text-xs uppercase tracking-[0.2em] mb-2" style={{ color: "#9B6A2E" }}>
-                        Meal Preference <span className="opacity-60">(optional)</span>
-                    </label>
-                    <select
-                        value={form.meal}
-                        onChange={(e) => update("meal", e.target.value)}
-                        className={inputClass}
-                        style={inputStyle}
-                    >
-                        <option value="">No preference</option>
-                        <option value="Vegetarian">Vegetarian</option>
-                        <option value="Vegan">Vegan</option>
-                        <option value="Jain">Jain</option>
-                        <option value="Non-vegetarian">Non-vegetarian</option>
-                    </select>
                 </div>
 
                 <div>

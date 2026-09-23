@@ -5,6 +5,7 @@ import Navbar from "@/components/wedding/Navbar";
 import Hero from "@/components/wedding/Hero";
 import Countdown from "@/components/wedding/Countdown";
 import Venue from "@/components/wedding/Venue";
+import RSVP from "@/components/wedding/RSVP";
 import Footer from "@/components/wedding/Footer";
 import FloatingButtons from "@/components/wedding/FloatingButtons";
 import { WEDDING_CONFIG } from "@/lib/weddingConfig";
@@ -110,6 +111,7 @@ export default function Invitation() {
                         <Hero />
                         <Countdown />
                         <Venue />
+                        <RSVP />
                     </main>
                     <Footer onReplayIntro={replayIntro} />
                     <FloatingButtons
