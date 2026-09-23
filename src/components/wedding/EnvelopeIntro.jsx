@@ -87,7 +87,7 @@ export default function EnvelopeIntro({ onOpen, onUserGesture }) {
 
                 {!started && (
                     <img
-                        src="/images/envelope-poster.jpg"
+                        src="/images/envelope-poster.webp"
                         alt="Sealed wedding invitation envelope"
                         className="absolute inset-0 w-full h-full object-cover"
                     />

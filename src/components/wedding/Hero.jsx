@@ -10,7 +10,7 @@ const GOLD_SHADOW = "0 2px 14px rgba(0,0,0,0.55)";
 const GOLD_DEEP_SHADOW = "0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.7)";
 
 export default function Hero() {
-    const { brideName, groomName, familyNames } = WEDDING_CONFIG;
+    const { brideName, groomName } = WEDDING_CONFIG;
 
     return (
         <section
@@ -88,23 +88,6 @@ export default function Hero() {
                         </span>
                         <span className="block text-7xl sm:text-8xl md:text-9xl">{groomName}</span>
                     </motion.h1>
-                </div>
-
-                <div className="px-6 text-center -mt-2">
-                    <motion.p
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 1 }}
-                        className="tracking-[0.25em] text-[10px] sm:text-xs uppercase"
-                        style={{
-                            color: GOLD_DEEP,
-                            fontFamily: "'Cinzel', serif",
-                            fontWeight: 700,
-                            textShadow: GOLD_DEEP_SHADOW,
-                        }}
-                    >
-                        {familyNames.brideFamily} &amp; {familyNames.groomFamily}
-                    </motion.p>
                 </div>
 
                 <div className="pb-24 sm:pb-16 px-6 text-center">
