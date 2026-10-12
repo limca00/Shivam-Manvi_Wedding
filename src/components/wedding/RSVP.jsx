@@ -19,7 +19,7 @@ export default function RSVP() {
 
     const update = (k, v) => setForm((f) => ({ ...f, [k]: v }));
 
-    const onSubmit = async (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
         const endpoint = WEDDING_CONFIG.rsvpEndpoint;
 
@@ -32,26 +32,29 @@ export default function RSVP() {
         }
 
         setStatus("submitting");
-        try {
-            // Apps Script web apps don't reliably send CORS headers back to the
-            // browser even on success, so we fire the request opaquely (no-cors)
-            // and treat a resolved fetch as success. text/plain avoids a CORS
-            // preflight (OPTIONS), which Apps Script doesn't handle.
-            await fetch(endpoint, {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "text/plain;charset=utf-8" },
-                body: JSON.stringify({
-                    name: form.name,
-                    guests: form.guests,
-                    attendance: form.attendance,
-                    message: form.message,
-                }),
-            });
-            setStatus("success");
-        } catch (err) {
-            setStatus("error");
-        }
+
+        // Apps Script web apps don't reliably send CORS headers back to the
+        // browser, so the response body/status can't be read anyway (no-cors
+        // makes it opaque) — mode:no-cors also means fetch() only rejects on
+        // a genuine network failure, never on the request reaching Google.
+        // Apps Script itself also takes 2-8s per request (cold starts +
+        // synchronous sheet write + email send), so we don't make guests sit
+        // through that: fire the request in the background and show success
+        // right away. text/plain avoids a CORS preflight (OPTIONS), which
+        // Apps Script doesn't handle.
+        fetch(endpoint, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify({
+                name: form.name,
+                guests: form.guests,
+                attendance: form.attendance,
+                message: form.message,
+            }),
+        }).catch(() => { });
+
+        setTimeout(() => setStatus("success"), 400);
     };
 
     return (
